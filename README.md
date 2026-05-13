@@ -1,6 +1,6 @@
 
 # Progetto finale: LuxAI-llm - Retail Intelligence
-Autore: IChris Berry N'dry 
+Autore: Chris Berry N'dry 
 
 ## Parte 1 — Fine-tuning
 - **Modello scelto e motivazione:** Ho scelto `distilbert-base-uncased`. Essendo un modello "distillato", offre un eccellente bilanciamento tra le performance di un modello transformer puro e la leggerezza computazionale, permettendoci di fare fine-tuning su hardware locale senza incorrere in continui Out-Of-Memory (OOM).
