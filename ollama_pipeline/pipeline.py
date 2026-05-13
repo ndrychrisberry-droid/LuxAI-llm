@@ -1,24 +1,35 @@
-from transformers import pipeline
+import requests
+import json
 
-print("Caricamento del Personal Shopper leggero...")
-# Usiamo un modello piccolo (GPT-2 o simile) che non richiede Ollama
-generator = pipeline('text-generation', model='gpt2')
-
-def luxury_chat(user_input):
-    # Prompt semplificato per modelli piccoli
-    prompt = f"Context: I am a luxury personal shopper in Via Roma. Customer asks: {user_input} Answer:"
+def run_luxury_pipeline():
+    url = "http://localhost:11434/api/generate"
     
-    res = generator(prompt, max_new_tokens=50, num_return_sequences=1, truncation=True)
-    return res[0]['generated_text'].split("Answer:")[1]
+    # System Prompt richiesto dalla traccia
+    system_prompt = "Sei un raffinato Concierge di una boutique di lusso. Rispondi in italiano in modo elegante e professionale."
+    
+    print("--- Concierge Digitale Attivo (Ollama/Llama3) ---")
+    print("(Scrivi 'esci' per chiudere)\n")
+
+    while True:
+        user_input = input("Cliente: ")
+        if user_input.lower() in ['esci', 'exit', 'quit']:
+            break
+
+        payload = {
+            "model": "llama3",
+            "prompt": f"{system_prompt}\n\nCliente: {user_input}",
+            "stream": False
+        }
+
+        try:
+            response = requests.post(url, json=payload)
+            response.raise_for_status()
+            data = response.json()
+            print(f"\nAssistant: {data['response']}\n")
+            print("-" * 30)
+        except Exception as e:
+            print(f"\nErrore di connessione a Ollama: {e}")
+            break
 
 if __name__ == "__main__":
-    print("\n--- Lux-LLM: Modalità Emergenza attiva ---")
-    while True:
-        domanda = input("Cliente: ")
-        if domanda.lower() in ['esci', 'exit']: break
-        
-        try:
-            risposta = luxury_chat(domanda)
-            print(f"\nAssistant: {risposta}\n")
-        except Exception as e:
-            print(f"Errore: {e}")
+    run_luxury_pipeline()

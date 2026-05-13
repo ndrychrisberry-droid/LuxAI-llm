@@ -16,8 +16,8 @@ else:
 
 # --- OTTIMIZZAZIONE PER IL 14 MAGGIO ---
 # Prendiamo un sottoinsieme per finire il training in pochi minuti
-dataset["train"] = dataset["train"].select(range(1000)) 
-dataset["test"] = dataset["test"].select(range(200))
+#dataset["train"] = dataset["train"].select(range(1000)) 
+#dataset["test"] = dataset["test"].select(range(200))
 # ----------------------------------------
 
 # 2. PREPARAZIONE TARGET (LABEL)
