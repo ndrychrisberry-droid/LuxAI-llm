@@ -20,7 +20,6 @@ def run_luxury_pipeline():
     print("--- Concierge Digitale Attivo (Ollama/Llama3) ---")
     print("(Scrivi 'esci' per chiudere)\n")
 
-    # Il ciclo while è fondamentale per mantenere la chat aperta!
     while True:
         user_input = input("Cliente: ")
         
