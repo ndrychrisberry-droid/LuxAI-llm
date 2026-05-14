@@ -57,7 +57,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. LOGICA OLLAMA (Llama 3) ---
+
 def interroga_ollama(prompt):
     url = "http://localhost:11434/api/generate"
     # System Prompt per definire l'identità del brand
