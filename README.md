@@ -30,3 +30,13 @@ L'interfaccia Streamlit include un pulsante "AVVIA DIAGNOSTICA" progettato come 
    ```bash
    git clone [https://github.com/ndrychrisberry-droid/LuxAI-llm.git](https://github.com/ndrychrisberry-droid/LuxAI-llm.git)
    cd LuxAI-llm
+Installa le dipendenze Python:
+   pip install -r requirements.txt
+
+Configura Ollama:
+Assicurati di aver installato Ollama sul tuo sistema e scarica il modello Llama 3:
+   Bash
+   ollama run llama3
+
+Avvia l'applicazione Streamlit:
+   streamlit run app.py
