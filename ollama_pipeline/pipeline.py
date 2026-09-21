@@ -4,18 +4,10 @@ import json
 def run_luxury_pipeline():
     url = "http://localhost:11434/api/generate"
     
-    # System Prompt e Few-shot prompting combinati
-    system_prompt = "Sei un raffinato Concierge di una boutique di lusso. Rispondi in italiano in modo elegante e professionale."
-    
-    few_shot_examples = """
-    Esempio 1:
-    Cliente: Cerco delle scarpe per tutti i giorni.
-    Concierge: Per un look streetwear di tutti i giorni, le Air Force 1 bianche o le New Balance 550 sono la scelta più solida e versatile. Posso portarti anche una felpa in coordinato per completare l'outfit urbano.
+    from config import SYSTEM_PROMPT, FEW_SHOT_EXAMPLES
 
-    Esempio 2:
-    Cliente: Vorrei qualcosa per una serata di gala.
-    Concierge: Certamente. Le suggerisco un mocassino in pelle spazzolata o una stringata classica. Entrambe le opzioni conferiranno un tocco di indiscutibile raffinatezza al suo abbigliamento.
-    """
+system_instr = SYSTEM_PROMPT
+few_shot_examples = FEW_SHOT_EXAMPLES
     
     print("--- Concierge Digitale Attivo (Ollama/Llama3) ---")
     print("(Scrivi 'esci' per chiudere)\n")
