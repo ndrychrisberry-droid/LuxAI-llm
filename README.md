@@ -1,20 +1,32 @@
 
-# Progetto finale: LuxAI-llm - Retail Intelligence
-Autore: Chris Berry N'dry 
+# 🛍️ LuxAI-LLM: Retail Intelligence & Concierge Digitale
 
-## Parte 1 — Fine-tuning
-- **Modello scelto e motivazione:** Ho scelto `distilbert-base-uncased`. Essendo un modello "distillato", offre un eccellente bilanciamento tra le performance di un modello transformer puro e la leggerezza computazionale, permettendoci di fare fine-tuning su hardware locale senza incorrere in continui Out-Of-Memory (OOM).
-- **Dataset scelto e motivazione:** `hugginglearners/amazon-reviews-sentiment-analysis`. Abbiamo optato per recensioni e-commerce reali perché l'obiettivo del progetto è applicare l'AI al settore retail (nello specifico, l'analisi del sentiment dei clienti per migliorare l'esperienza in store). 
-- **Risultati ottenuti (metriche):** Configurati gli iperparametri (learning rate 2e-5, batch size 8), il modello ha calcolato l'accuracy sulle predizioni del validation set. Per ragioni di tempi di computazione legati alla data di consegna, l'addestramento è stato ridotto a un sottoinsieme rappresentativo per testare l'integrità della pipeline.
-- **Difficoltà incontrate:**
-  1. *Data Cleaning:* Valori nulli (NaN) nella colonna testo che causavano `TypeError` durante la tokenizzazione. Risolto forzando la conversione in stringa (`str(text)`).
-  2. *Dataset Splitting:* Il dataset originale non prevedeva una chiave 'test' di default causando un `KeyError`. Risolto implementando un `train_test_split(test_size=0.2)` manuale.
-  3. *Dipendenze:* Cambiamenti di sintassi nelle nuove versioni della libreria Transformers (es. `evaluation_strategy` deprecato in favore di `eval_strategy`).
+Un'applicazione AI-driven sviluppata in **Streamlit** e progettata per rivoluzionare l'esperienza cliente all'interno degli store fisici. Il progetto integra modelli di Natural Language Processing (NLP) e Large Language Models (LLM) eseguiti in locale per fornire analisi in tempo reale e assistenza alla vendita.
 
-## Parte 2 — Pipeline Ollama
-- **Task scelto e motivazione:** Abbiamo creato un "Luxury Personal Shopper" virtuale. L'obiettivo è assistere il personale di vendita o il cliente suggerendo outfit o articoli (es. sneakers urban, abiti eleganti) basati sul contesto e sul tono di voce di una boutique di alto livello.
-- **Strategie di prompting usate:** 1. *System Prompt personalizzato:* Per definire il ruolo, il tono colto e la conoscenza del dominio (materiali, brand).
-  2. *Few-shot prompting:* Abbiamo inserito esempi strutturati (User/Assistant) nel codice per forzare il modello a rispondere con uno stile specifico e formattato prima di passargli la domanda reale.
-- **Esempio di input/output:** - *Input:* "Cerco delle scarpe per tutti i giorni."
-  - *Output:* "Per un look streetwear di tutti i giorni, le Air Force 1 bianche o le New Balance 550 sono la scelta più solida e versatile. Posso portarti anche una felpa in coordinato per completare l'outfit urbano."
-- **Considerazioni sui risultati:** Il System Prompt è cruciale. Senza di esso il modello dava risposte robotiche e generiche. Con l'aggiunta del Few-shot, le risposte sono diventate molto più orientate alla vendita assistita, perfette per un'applicazione pratica in uno store fisico.
+## 🎯 Obiettivo del Progetto
+Nel settore Fashion & Luxury, la personalizzazione dell'esperienza e la comprensione del cliente sono fondamentali. Questo progetto mira a:
+1. **Analizzare il feedback** dei clienti in tempo reale per estrarre insight sul sentiment.
+2. **Supportare lo staff di vendita** (o i clienti stessi) attraverso un assistente virtuale intelligente capace di suggerire abbinamenti e strategie di cross-selling mirate.
+
+## ⚙️ Stack Tecnologico e Architettura
+Il progetto sfrutta un'architettura ibrida di modelli di intelligenza artificiale:
+
+*   **Interfaccia Utente:** App **Streamlit** per una dashboard interattiva e user-friendly.
+*   **Sentiment Analysis:** Pipeline NLP basata su **DistilBERT** per analizzare testi e interazioni, classificando il sentiment del cliente in modo rapido ed efficiente.
+*   **Concierge Digitale (LLM):** Modello **Llama 3** eseguito interamente in locale tramite **Ollama** per garantire massima privacy dei dati.
+*   **Prompt Engineering:** Ottimizzazione del modello linguistico tramite tecniche di **Few-Shot Prompting** per generare risposte altamente contestualizzate e suggerimenti di **cross-selling** realistici.
+
+## 🚀 Funzionalità Principali
+- **Analisi del Sentiment Istantanea:** Inserendo log di conversazioni o feedback dei clienti, il modello DistilBERT valuta immediatamente la soddisfazione del cliente.
+- **Motore di Cross-Selling:** Il "Concierge Digitale" riceve l'input sugli articoli a cui il cliente è interessato e, sfruttando il Few-Shot Prompting, genera suggerimenti di up-selling e cross-selling in perfetto stile retail.
+- **Privacy by Design:** L'utilizzo di Ollama permette di processare dati sensibili dei clienti interamente in locale, senza appoggiarsi a server cloud esterni o API a pagamento.
+
+## ⚠️ Note sulla Demo e Limitazioni Attuali
+L'interfaccia Streamlit include un pulsante "AVVIA DIAGNOSTICA" progettato come mock-up UI per dimostrare la user experience finale per lo staff in store. Attualmente, l'animazione della progress bar e l'output del 89.4% sono simulati per scopi dimostrativi. Nelle prossime release, questa funzione verrà collegata direttamente agli script di validazione per mostrare le metriche di inferenza del modello aggiornate in tempo reale.
+
+## 🛠️ Come installare ed eseguire il progetto
+
+1. **Clona la repository:**
+   ```bash
+   git clone [https://github.com/ndrychrisberry-droid/LuxAI-llm.git](https://github.com/ndrychrisberry-droid/LuxAI-llm.git)
+   cd LuxAI-llm
