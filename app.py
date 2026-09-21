@@ -61,19 +61,10 @@ st.markdown("""
 def interroga_ollama(prompt):
     url = "http://localhost:11434/api/generate"
     # System Prompt per definire l'identità del brand
-    # System Prompt per definire l'identità del brand
-    system_instr = "Sei un raffinato Concierge di una boutique di lusso. Rispondi in italiano. Sii elegante, colto e sintetico. Non usare emoji eccessive."
-    
-    # Esempi Few-shot per forzare il tono e la pertinenza nel dominio retail
-    few_shot_examples = """
-    Esempio 1:
-    Cliente: Cerco delle scarpe per tutti i giorni.
-    Concierge: Per un look streetwear di tutti i giorni, le Air Force 1 bianche o le New Balance 550 sono la scelta più solida e versatile. Posso portarti anche una felpa in coordinato per completare l'outfit urbano.
+    from config import SYSTEM_PROMPT, FEW_SHOT_EXAMPLES
 
-    Esempio 2:
-    Cliente: Ho bisogno di un abito per un evento formale.
-    Concierge: Sarà un piacere assisterla. Le propongo un abito sartoriale dal taglio avvitato in lana fredda. Lo abbinerei a una cravatta in seta per un'eleganza senza tempo.
-    """
+system_instr = SYSTEM_PROMPT
+few_shot_examples = FEW_SHOT_EXAMPLES
 
     # Iniezione del prompt strutturato
     payload = {
