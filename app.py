@@ -84,7 +84,7 @@ def interroga_ollama(prompt):
     
     try:
         # Timeout di 10 secondi per evitare blocchi infiniti
-        response = requests.post(url, json=payload )
+        response = requests.post(url, json=payload, timeout=10 )
         if response.status_code == 200:
             return response.json().get('response', "Spiacente, non riesco a elaborare la richiesta.")
         else:
